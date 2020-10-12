@@ -10,22 +10,18 @@ import matplotlib.pyplot as plt
 # graph = nx.read_graphml("v_graph_9Oct2020.graphml")
 # adj = np.adjacency_matrix(graph).todense()
 
-
 #
 #	define random (Erdos-Renyi) graph
 #
 np.random.seed(1990)
-N = 20		# number of nodes
-deg = N/5.		# average degree
+N = 20			# number of nodes
+deg = (N-1)/5.	# average degree (a fifth of the total nodes)
 adj = np.zeros((N,N), dtype=int)
 for i in range(N):
 	for j in range(i+1,N):
 		if np.random.rand() < deg/(N-1):
 			adj[i,j] += 1
 			adj[j,i] += 1
-
-# vector of non vanishing edges (entries of adjacency matrix)
-edges = np.stack(np.where(adj == 1)).T
 
 # uncontrolled transition probability
 # transitions from a given node have equal probabilities
